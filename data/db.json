@@ -1,0 +1,89 @@
+{
+  "users": [],
+  "activities": [
+    {
+      "id": "4eITdyAe0EOsy5O-CPXPk",
+      "title": "Guided Meditation Session",
+      "description": "Join our 30-minute guided meditation to reduce stress and improve emotional wellbeing.",
+      "type": "mental",
+      "date": "Tomorrow",
+      "time": "3:00 PM",
+      "duration": "30 mins",
+      "participants": 12,
+      "emoji": "🧘",
+      "color": "#cdeafe"
+    },
+    {
+      "id": "6tHmGoDxuVYqbSJMv-wfl",
+      "title": "Watercolor Painting Workshop",
+      "description": "Express yourself through art in this beginner-friendly watercolor session. All materials provided.",
+      "type": "creative",
+      "date": "Fri, Nov 17",
+      "time": "11:00 AM",
+      "duration": "1 hour",
+      "participants": 8,
+      "emoji": "🎨",
+      "color": "#fde2f3"
+    },
+    {
+      "id": "H5uygYdtVLNsdCZFQXOWV",
+      "title": "Gentle Yoga Class",
+      "description": "Low-impact yoga designed for all ability levels to improve flexibility and relaxation.",
+      "type": "physical",
+      "date": "Sat, Nov 18",
+      "time": "10:00 AM",
+      "duration": "45 mins",
+      "participants": 15,
+      "emoji": "🧘‍♀️",
+      "color": "#eaf7e9"
+    },
+    {
+      "id": "Zb17-DASoi7bF5-_aeaOD",
+      "title": "Support Group Discussion",
+      "description": "Share experiences and coping strategies in a safe, moderated environment.",
+      "type": "social",
+      "date": "Sun, Nov 19",
+      "time": "2:00 PM",
+      "duration": "1 hour",
+      "participants": 20,
+      "emoji": "💬",
+      "color": "#fff5cc"
+    },
+    {
+      "id": "BYw3czkQScHKc1wlJdXRH",
+      "title": "Music Therapy Session",
+      "description": "Explore emotional expression through music listening and simple instruments.",
+      "type": "creative",
+      "date": "Mon, Nov 20",
+      "time": "4:00 PM",
+      "duration": "45 mins",
+      "participants": 10,
+      "emoji": "🎵",
+      "color": "#e6e6fa"
+    },
+    {
+      "id": "I3FsV4IThSTh2pMXw2Icn",
+      "title": "Mindfulness Walk",
+      "description": "Outdoor walk focusing on mindfulness and connecting with nature.",
+      "type": "mental",
+      "date": "Tue, Nov 21",
+      "time": "9:00 AM",
+      "duration": "30 mins",
+      "participants": 18,
+      "emoji": "🚶‍♂️",
+      "color": "#d1f7d6"
+    }
+  ],
+  "journals": [],
+  "moods": [],
+  "therapySessions": [],
+  "chatMessages": [
+    {
+      "id": "amvW2KAmh_UAMrXeqnCUp",
+      "room": "general",
+      "user": "CareConnect Bot",
+      "content": "Welcome to the General Support chat! Please be kind and respectful to others.",
+      "time": "12:44 PM"
+    }
+  ]
+}
