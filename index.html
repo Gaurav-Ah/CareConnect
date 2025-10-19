@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareConnect - Healing through Happiness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #02315E;
+            --primary-light: #2F70AF;
+            --accent1: #B9848C;
+            --accent2: #806491;
+            --accent3: #D58EBF;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --text-dark: #2d3748;
+            --text-light: #4a5568;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius: 12px;
+        }
+
+       body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+
+
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 0.75rem 0;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            font-weight: 500;
+            text-decoration: none;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent1);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* Compact Carousel Section */
+        .hero-carousel {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            margin-top: 70px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: var(--radius);
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(5px);
+        }
+
+        .carousel-content h1 {
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .carousel-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .carousel-quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin: 1.5rem 0;
+            color: var(--accent2);
+            position: relative;
+        }
+
+        .carousel-quote::before,
+        .carousel-quote::after {
+            content: '"';
+            color: var(--accent1);
+            font-size: 1.5rem;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .indicator.active {
+            background-color: var(--white);
+            transform: scale(1.3);
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            margin: 0.5rem;
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(2, 49, 94, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 49, 94, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--primary);
+            border: 1px solid var(--primary-light);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(47, 112, 175, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent1);
+            color: var(--white);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent2);
+            transform: translateY(-2px);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: linear-gradient(to bottom, var(--white) 0%, #f8f9fa 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+      
+
+
+        .feature-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent1);
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary);
+            padding: 3rem 0 1.5rem;
+            color: var(--white);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer .container {
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--accent3);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer a:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+        /* Welcome Popup Styles */
+        .welcome-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--white);
+            border-radius: var(--radius);
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            z-index: 1001;
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .welcome-popup h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .welcome-popup p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        
+        .welcome-popup .welcome-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+        
+        .welcome-popup .close-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .welcome-popup .close-btn:hover {
+            background-color: var(--primary-light);
+            transform: scale(1.05);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -40%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-carousel {
+                height: 450px;
+                margin-top: 60px;
+            }
+            
+            .carousel-content {
+                padding: 1.5rem;
+                max-width: 90%;
+            }
+            
+            .carousel-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .carousel-content p {
+                font-size: 1rem;
+            }
+            
+            .carousel-quote {
+                font-size: 1rem;
+                margin: 1rem 0;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                gap: 0;
+                box-shadow: var(--shadow-md);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Popup Elements -->
+    <div class="overlay" id="overlay"></div>
+    <div class="welcome-popup" id="welcomePopup">
+        <div class="welcome-emoji">👋</div>
+        <h2>Welcome to CareConnect!</h2>
+        <p>We're so glad you're here. How are you feeling today?</p>
+        <button class="close-btn" id="closePopup">Continue</button>
+    </div>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="CareConnect Logo">
+                CareConnect
+            </a>
+            
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="login.html">Login</a>
+                <a href="signup.html">Sign Up</a>
+            </div>
+            <button class="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <!-- Compact Carousel Section -->
+    <section class="hero-carousel">
+        <!-- Slide 1 -->
+        <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+            <div class="carousel-content">
+                <h1>Find Support & Healing Together</h1>
+                <p>Connect with others facing similar challenges through social activities and mental wellness tools.</p>
+                <div class="carousel-quote">Healing is an art. It takes time, it takes practice, it takes love.</div>
+                <div class="cta-buttons">
+                    <a href="signup?role=patient" class="btn btn-primary">Join as Patient</a>
+                    <a href="signup?role=volunteer" class="btn btn-secondary">Join as Volunteer</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 2 -->
+        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+            <div class="carousel-content">
+                <h1>Community Support</h1>
+                <p>Join our network of caring individuals who understand what you're going through.</p>
+                <div class="carousel-quote">Alone we can do so little; together we can do so much.</div>
+                <div class="cta-buttons">
+                    <a href="signup?role=patient" class="btn btn-primary">Join Our Community</a>
+                    <a href="login?role=therapist" class="btn btn-accent">Therapist Login</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3 -->
+        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+            <div class="carousel-content">
+                <h1>Creative Healing</h1>
+                <p>Discover the therapeutic power of art, music, and movement.</p>
+                <div class="carousel-quote">Art washes away from the soul the dust of everyday life.</div>
+                <div class="cta-buttons">
+                    <a href="signup?role=patient" class="btn btn-primary">Explore Activities</a>
+                    <a href="signup?role=volunteer" class="btn btn-secondary">Volunteer</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 4 -->
+        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+            <div class="carousel-content">
+                <h1>Mental Wellness Tools</h1>
+                <p>Track your mood, journal your thoughts, and find peace of mind.</p>
+                <div class="carousel-quote">The greatest weapon against stress is our ability to choose one thought over another.</div>
+                <div class="cta-buttons">
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                    <a href="signup.html" class="btn btn-accent">Sign Up</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="carousel-indicators">
+            <div class="indicator active" data-slide="0"></div>
+            <div class="indicator" data-slide="1"></div>
+            <div class="indicator" data-slide="2"></div>
+            <div class="indicator" data-slide="3"></div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>How We Can Help</h2>
+                <p>Discover the benefits of our comprehensive wellness platform designed to support your journey</p>
+            </div>
+            <div class="feature-card">
+            <div class="icon">💬</div>
+             <h3>24/7 Chat Support</h3>
+             <p>Need someone to talk to? Access AI support or real-time help when you need it most.</p>
+            </div>
+            <div class="feature-card">
+              <div class="icon">📈</div>
+              <h3>Progress Insights</h3>
+                <p>View mood trends and activity summaries to reflect on your journey and achievements.</p>
+           </div>
+            <div class="feature-card">
+                <div class="icon">💃</div>
+                <h3>Social Activities</h3>
+                <p>Join dance, music, and art sessions designed for all ability levels in a supportive environment.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🧠</div>
+                <h3>Mental Wellness</h3>
+                <p>Track your mood, journal your thoughts, and access professional therapy resources.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🤝</div>
+                <h3>Peer Support</h3>
+                <p>Connect with others who understand what you're going through in our safe community.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 CareConnect. All rights reserved. 
+                <a href="privacy.html">Privacy Policy</a> | 
+                <a href="terms.html">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+
+        // Welcome Popup Functionality
+        const welcomePopup = document.getElementById('welcomePopup');
+        const overlay = document.getElementById('overlay');
+        const closeBtn = document.getElementById('closePopup');
+        
+        setTimeout(() => {
+            welcomePopup.style.display = 'block';
+            overlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }, 1000);
+        
+        closeBtn.addEventListener('click', function() {
+            welcomePopup.style.display = 'none';
+            overlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        overlay.addEventListener('click', function() {
+            welcomePopup.style.display = 'none';
+            overlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Carousel Functionality
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        let currentSlide = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            const nextIndex = (currentSlide + 1) % slides.length;
+            showSlide(nextIndex);
+        }
+
+        function startSlideShow() {
+            slideInterval = setInterval(nextSlide, 3000); // ⏱️ Slide changes every 3 seconds now
+        }
+
+        const carousel = document.querySelector('.hero-carousel');
+        carousel.addEventListener('mouseenter', () => clearInterval(slideInterval));
+        carousel.addEventListener('mouseleave', startSlideShow);
+
+        indicators.forEach(indicator => {
+            indicator.addEventListener('click', function() {
+                const slideIndex = parseInt(this.getAttribute('data-slide'));
+                showSlide(slideIndex);
+                clearInterval(slideInterval);
+                startSlideShow();
+            });
+        });
+
+        // ✅ Start after everything is ready
+        startSlideShow();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+body {
+  background-color: #C7F9CC; /* Mint green from your theme */
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* Auth Pages */
+.auth-container {
+    min-height: calc(100vh - 150px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+    background-color: var(--light-gray);
+}
+
+.auth-card {
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.auth-card h2 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.auth-card p {
+    color: var(--dark-gray);
+    margin-bottom: 2rem;
+}
+
+.btn-block {
+    width: 100%;
+    padding: 1rem;
+}
+
+.role-toggle {
+    display: flex;
+    margin-bottom: 1.5rem;
+    border-radius: 50px;
+    overflow: hidden;
+    background-color: var(--light-gray);
+}
+
+.role-btn {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.role-btn.active {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.auth-footer {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.auth-footer a {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+@media (max-width: 576px) {
+    .auth-card {
+        padding: 1.5rem;
+    }
+}

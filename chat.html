@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Community Chat | CareConnect</title>
+  <style>
+    :root {
+      --primary: #4a6fa5;
+      --secondary: #166088;
+      --accent: #4fc3f7;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --success: #28a745;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+   /* body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7fa;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+*/
+     body {
+            margin: 0;
+            padding: 0;
+             min-height: 100vh;
+            background: linear-gradient(135deg, #a0e9ff, #fbc2eb, #a18cd1, #ffffff);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       }
+
+         @keyframes gradientShift {
+         0% {
+           background-position: 0% 50%;
+           }
+       50% {
+          background-position: 100% 50%;
+          }
+        100% {
+      background-position: 0% 50%;
+       }
+        }
+    .wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Navbar */
+        .navbar {
+            background-color: white;
+            box-shadow: var(--shadow);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 6rem;
+            padding-bottom: 3rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            color: var(--secondary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Chat Layout */
+        .chat-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1.5rem;
+            height: 70vh;
+        }
+
+        /* Sidebar */
+        .chat-sidebar {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .chat-sidebar h2 {
+            color: var(--secondary);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .chat-rooms {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .chat-rooms li {
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .chat-rooms li:hover {
+            background-color: rgba(79, 195, 247, 0.1);
+        }
+
+        .chat-rooms li.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .online-users {
+            margin-top: auto;
+        }
+
+        .online-users h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .online-count {
+            background-color: var(--accent);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+
+        #user-list {
+            list-style: none;
+        }
+
+        #user-list li {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+
+        #user-list li::before {
+            content: '•';
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Main Chat Area */
+        .chat-main {
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .chat-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .chat-header h2 {
+            color: var(--secondary);
+            margin-bottom: 0.3rem;
+            font-size: 1.3rem;
+        }
+
+        .chat-header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1.5rem;
+        }
+
+        .message-user {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .message-user.you {
+            color: var(--accent);
+        }
+
+        .user-badge {
+            font-size: 0.7rem;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 50px;
+            margin-left: 0.5rem;
+        }
+
+        .message-content {
+            background-color: #f8f9fa;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            display: inline-block;
+            max-width: 70%;
+            line-height: 1.5;
+        }
+
+        .message-time {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 0.3rem;
+        }
+
+        /* Chat Input */
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input textarea {
+            flex: 1;
+            min-height: 50px;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            resize: none;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .chat-input textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(22, 96, 136, 0.3);
+        }
+    
+    @media (max-width: 768px) {
+        .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                gap: 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .chat-layout {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .chat-sidebar {
+                order: 2;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+        
+      /* [keep all responsive styles unchanged] */
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container nav-container">
+        <a href="index.html" class="logo">Care<span>Connect</span></a>
+        <div class="nav-links">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="activities.html">Activities</a>
+          <a href="mood.html">Mood Tracker</a>
+          <a href="journal.html">Journal</a>
+          <a href="chat.html" class="active">Chat</a>
+          <a href="schedule.html">Schedule</a>
+          <a href="login.html">Logout</a>
+        </div>
+        <button class="hamburger">☰</button>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <header class="page-header">
+          <h1>Community Support Chat</h1>
+          <p>Connect with others in a safe, supportive environment</p>
+        </header>
+
+        <div class="chat-layout">
+          <!-- Sidebar -->
+          <aside class="chat-sidebar">
+            <h2>Chat Rooms</h2>
+            <ul class="chat-rooms">
+              <li class="active" data-room="general">General Support</li>
+              <li data-room="chronic-pain">Chronic Pain</li>
+              <li data-room="mental-health">Mental Health</li>
+              <li data-room="caregivers">Caregivers</li>
+              <li data-room="success-stories">Success Stories</li>
+            </ul>
+
+            <div class="online-users">
+              <h3>Online Now <span class="online-count" id="online-count">12</span></h3>
+              <ul id="user-list">
+                <!-- Users will be added via JavaScript -->
+              </ul>
+            </div>
+          </aside>
+
+          <!-- Main Chat Area -->
+          <section class="chat-main">
+            <div class="chat-header">
+              <h2 id="current-room">General Support</h2>
+              <p id="room-topic">A place for general support and conversation</p>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+              <!-- Messages will be added via JavaScript -->
+            </div>
+
+            <div class="chat-input">
+              <textarea id="message-input" placeholder="Type your message here..."></textarea>
+              <button id="send-button" class="btn btn-primary">Send</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+ 
+
+  <script src="chat.js"></script>
+</body>
+</html>

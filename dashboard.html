@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | CareConnect</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --creative: #FFD6E0;
+            --physical: #C1FBA4;
+            --mental: #B5E2FA;
+            --social: #FCF4A3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+             min-height: 100vh;
+            background: linear-gradient(135deg, #a0e9ff, #fbc2eb, #a18cd1, #ffffff);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       }
+
+         @keyframes gradientShift {
+         0% {
+           background-position: 0% 50%;
+           }
+       50% {
+          background-position: 100% 50%;
+          }
+        100% {
+      background-position: 0% 50%;
+       }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: white;
+            box-shadow: var(--shadow);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 6rem;
+            padding-bottom: 3rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            color: var(--secondary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-message {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Cards */
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            color: var(--secondary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            grid-column: 1 / -1;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .action-btn {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .action-btn .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Mood Summary */
+        .mood-display {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .mood-emoji {
+            font-size: 3rem;
+            margin-right: 1rem;
+        }
+
+        .mood-details h3 {
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .mood-details p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Upcoming Activities */
+        .activity-list {
+            margin-bottom: 1.5rem;
+        }
+
+        .activity-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-name {
+            font-weight: 600;
+        }
+
+        .activity-time {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Encouragement */
+        .encouragement-card {
+            background-color: rgba(79, 195, 247, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .encouragement-card p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+            color: var(--dark);
+        }
+
+        /* Journal */
+        .journal-card textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-family: inherit;
+            resize: vertical;
+            transition: var(--transition);
+        }
+
+        .journal-card textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);
+        }
+
+        /* Therapy Reminder */
+        .reminder-card {
+            background-color: rgba(22, 96, 136, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .reminder-card p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(22, 96, 136, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #3aa8e0;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #22577A;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                gap: 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .action-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Care<span>Connect</span></a>
+            <div class="nav-links">
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="activities.html">Activities</a>
+                <a href="mood.html">Mood Tracker</a>
+                <a href="journal.html">Journal</a>
+                <a href="chat.html">Chat</a>
+                <a href="schedule.html">Schedule</a>
+                <a href="login.html">Logout</a>
+            </div>
+            <button class="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <header class="page-header">
+                <h1>Welcome Back, <span id="user-name">Patient</span></h1>
+                <p class="welcome-message">How are you feeling today?</p>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Quick Actions -->
+                <div class="card quick-actions">
+                    <h2>Quick Actions</h2>
+                    <div class="action-buttons">
+                        <a href="mood.html" class="action-btn">
+                            <span class="icon">📊</span>
+                            <span>Log Mood</span>
+                        </a>
+                        <a href="journal.html" class="action-btn">
+                            <span class="icon">📝</span>
+                            <span>Write Journal</span>
+                        </a>
+                        <a href="activities.html" class="action-btn">
+                            <span class="icon">🎨</span>
+                            <span>Join Activity</span>
+                        </a>
+                        <a href="chat.html" class="action-btn">
+                            <span class="icon">💬</span>
+                            <span>Chat Now</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mood Summary -->
+                <div class="card mood-summary">
+                    <h2>Recent Mood</h2>
+                    <div class="mood-display">
+                        <div class="mood-emoji" id="current-mood">😐</div>
+                        <div class="mood-details">
+                            <h3 id="mood-status">Neutral</h3>
+                            <p id="mood-intensity">Intensity: 5/10</p>
+                            <p id="mood-date">Today</p>
+                        </div>
+                    </div>
+                    <a href="mood.html" class="btn btn-secondary">View History</a>
+                </div>
+
+                <!-- Upcoming Activities -->
+                <div class="card upcoming-activities">
+                    <h2>Upcoming Activities</h2>
+                    <div class="activity-list" id="upcoming-activities">
+                        <div class="loading">Loading activities...</div>
+                    </div>
+                    <a href="activities.html" class="btn btn-primary">View All Activities</a>
+                </div>
+
+                <!-- Encouragement -->
+                <div class="card encouragement">
+                    <h2>Daily Encouragement</h2>
+                    <div class="encouragement-card">
+                        <p id="encouragement-text">You're doing great! Remember to take things one step at a time.</p>
+                        <button id="new-encouragement" class="btn btn-primary">New Message</button>
+                    </div>
+                </div>
+
+                <!-- Quick Journal -->
+                <div class="card quick-journal">
+                    <h2>Quick Journal Entry</h2>
+                    <div class="journal-card">
+                        <textarea id="quick-journal-entry" placeholder="How has your day been so far?"></textarea>
+                        <button id="save-journal" class="btn btn-primary">Save Entry</button>
+                    </div>
+                </div>
+
+                <!-- Therapy Reminder -->
+                <div class="card therapy-reminder">
+                    <h2>Therapy Reminder</h2>
+                    <div class="reminder-card">
+                        <p id="next-session">No upcoming sessions scheduled</p>
+                        <a href="schedule.html" class="btn btn-secondary">Schedule Session</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 CareConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

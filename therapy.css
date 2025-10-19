@@ -1,0 +1,49 @@
+
+ body {
+            margin: 0;
+            padding: 0;
+             min-height: 100vh;
+            background: linear-gradient(135deg, #a0e9ff, #fbc2eb, #a18cd1, #ffffff);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       }
+
+         @keyframes gradientShift {
+         0% {
+           background-position: 0% 50%;
+           }
+       50% {
+          background-position: 100% 50%;
+          }
+        100% {
+      background-position: 0% 50%;
+       }
+        }
+
+/* Therapy Booking Styles */
+.therapy-container {
+    padding: 2rem 0;
+}
+
+.therapy-container h1 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--secondary);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.therapy-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.available-therapists {
+    display: flex
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Therapy Schedule | CareConnect</title>
+    <style>
+         body {
+            margin: 0;
+            padding: 0;
+             min-height: 100vh;
+            background: linear-gradient(135deg, #a0e9ff, #fbc2eb, #a18cd1, #ffffff);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       }
+
+         @keyframes gradientShift {
+         0% {
+           background-position: 0% 50%;
+           }
+       50% {
+          background-position: 100% 50%;
+          }
+        100% {
+      background-position: 0% 50%;
+       }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="components.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">CareConnect</a>
+            <div class="nav-links">
+                <a href="patient.html">Dashboard</a>
+                <a href="activities.html">Activities</a>
+                <a href="mood.html">Mood Tracker</a>
+                <a href="journal.html">Journal</a>
+                <a href="chat.html">Chat</a>
+                <a href="schedule.html" class="active">Schedule</a>
+                <a href="login.html">Logout</a>
+            </div>
+            <button class="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <main class="container therapy-container fade-in">
+        <h1>Therapy Sessions</h1>
+        <p class="subtitle">Book appointments with licensed therapists</p>
+        
+        <div class="therapy-layout">
+            <section class="available-therapists">
+                <h2>Available Therapists</h2>
+                
+                <div class="therapist-card">
+                    <div class="therapist-info">
+                        <div class="therapist-avatar">DR</div>
+                        <div class="therapist-details">
+                            <h3>Dr. Rachel Green</h3>
+                            <p class="specialty">Cognitive Behavioral Therapy</p>
+                            <div class="rating">
+                                ★★★★★ <span>4.9 (128 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="bio">Specializes in chronic illness adjustment and pain management techniques.</p>
+                    <button class="btn btn-primary btn-block book-btn" data-therapist="Dr. Rachel Green">Book Session</button>
+                </div>
+                
+                <div class="therapist-card">
+                    <div class="therapist-info">
+                        <div class="therapist-avatar">JM</div>
+                        <div class="therapist-details">
+                            <h3>Dr. John Miller</h3>
+                            <p class="specialty">Mindfulness-Based Therapy</p>
+                            <div class="rating">
+                                ★★★★☆ <span>4.7 (95 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="bio">Focuses on stress reduction and emotional regulation for chronic conditions.</p>
+                    <button class="btn btn-primary btn-block book-btn" data-therapist="Dr. John Miller">Book Session</button>
+                </div>
+                
+                <div class="therapist-card">
+                    <div class="therapist-info">
+                        <div class="therapist-avatar">SP</div>
+                        <div class="therapist-details">
+                            <h3>Dr. Sarah Patel</h3>
+                            <p class="specialty">Acceptance and Commitment Therapy</p>
+                            <div class="rating">
+                                ★★★★★ <span>4.8 (112 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="bio">Helps patients build psychological flexibility and value-based living.</p>
+                    <button class="btn btn-primary btn-block book-btn" data-therapist="Dr. Sarah Patel">Book Session</button>
+                </div>
+            </section>
+            
+            <section class="booking-calendar">
+                <h2>Select Appointment Time</h2>
+                <div id="calendar"></div>
+                
+                <div class="booking-details" id="booking-details" style="display: none;">
+                    <h3>Appointment Details</h3>
+                    <p><strong>Therapist:</strong> <span id="selected-therapist"></span></p>
+                    <p><strong>Date & Time:</strong> <span id="selected-time"></span></p>
+                    <button id="confirm-booking" class="btn btn-primary">Confirm Booking</button>
+                </div>
+            </section>
+        </div>
+        
+        <section class="upcoming-sessions">
+            <h2>Your Upcoming Sessions</h2>
+            <div class="sessions-list" id="sessions-list">
+                <!-- Sessions will be loaded via JavaScript -->
+                <p class="no-sessions">No upcoming sessions booked</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 CareConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="app.js"></script>
+    
+</body>
+</html>
